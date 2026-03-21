@@ -1,0 +1,8 @@
+/* App CSS - Using TailwindCSS for styling */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

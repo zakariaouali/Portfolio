@@ -1,0 +1,152 @@
+/* Footer Component Styles */
+
+footer {
+  background-color: #111632;
+  border-top: 1px solid rgba(0, 217, 255, 0.2);
+  padding: 48px 0;
+  position: relative;
+  z-index: 10;
+}
+
+footer .max-w-6xl {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+@media (min-width: 768px) {
+  footer .max-w-6xl {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+footer h3 {
+  font-size: 24px;
+  font-weight: bold;
+  background: linear-gradient(135deg, #00d9ff, #0099cc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+
+footer h4 {
+  color: #e0e7ff;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+footer p {
+  color: #a0aec0;
+  font-size: 14px;
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+footer li {
+  margin-bottom: 8px;
+}
+
+footer a {
+  color: #a0aec0;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #00d9ff;
+}
+
+footer .grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  margin-bottom: 32px;
+}
+
+@media (min-width: 768px) {
+  footer .grid-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+footer .divider {
+  height: 1px;
+  background: linear-gradient(to right, rgba(0, 217, 255, 0.2), rgba(0, 217, 255, 0.4), rgba(0, 217, 255, 0.2));
+  margin-bottom: 32px;
+}
+
+footer .bottom-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  footer .bottom-section {
+    flex-direction: row;
+  }
+}
+
+footer .social-links {
+  display: flex;
+  gap: 16px;
+}
+
+footer .social-link {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 217, 255, 0.2);
+  color: #00d9ff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+footer .social-link:hover {
+  border-color: rgba(0, 217, 255, 0.4);
+  background-color: rgba(0, 217, 255, 0.1);
+}
+
+.scroll-to-top {
+  display: none;
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 217, 255, 0.2);
+  color: #00d9ff;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 50;
+}
+
+.scroll-to-top:hover {
+  border-color: rgba(0, 217, 255, 0.4);
+  background-color: rgba(0, 217, 255, 0.1);
+}
+
+@media (min-width: 768px) {
+  .scroll-to-top {
+    display: flex;
+  }
+}

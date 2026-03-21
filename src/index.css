@@ -1,0 +1,72 @@
+/* Import all custom styles */
+@import url('./base-styles.css');
+@import url('./styles.css');
+@import url('./components/sections/sections.css');
+@import url('./components/Footer.css');
+@import url('./components/Loading.css');
+@import url('./components/TechStackCarousel.css');
+
+/* Root element styling */
+#root {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  flex-direction: ;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 217, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 217, 255, 0.3);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 217, 255, 0.5);
+}
+
+/* Glassmorphism Effect */
+.glass-effect {
+  background: rgba(17, 22, 50, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 217, 255, 0.1);
+}
+
+.glass-effect:hover {
+  background: rgba(17, 22, 50, 0.8);
+  border-color: rgba(0, 217, 255, 0.3);
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, #00d9ff 0%, #0099cc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glow Effect */
+.glow-effect {
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+}
+
+/* Interactive Elements */
+button, a.btn {
+  transition: all 0.3s ease;
+}
+
+button:hover, a.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(0, 217, 255, 0.4);
+}
