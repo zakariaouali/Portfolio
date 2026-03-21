@@ -138,7 +138,7 @@ const ContactSection: React.FC = () => {
                   <motion.a
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     whileTap={{ scale: 0.95 }}
-                    href="https://github.com"
+                    href="https://github.com/zakariaouali"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-4 glass-effect rounded-lg border border-neon-blue/20 text-neon-blue hover:border-neon-blue/40 hover:bg-neon-blue/10 transition-all"
@@ -148,7 +148,7 @@ const ContactSection: React.FC = () => {
                   <motion.a
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     whileTap={{ scale: 0.95 }}
-                    href="https://linkedin.com"
+                    href="https://www.linkedin.com/in/zakaria-ait-ahmad-ouali"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-4 glass-effect rounded-lg border border-neon-blue/20 text-neon-blue hover:border-neon-blue/40 hover:bg-neon-blue/10 transition-all"

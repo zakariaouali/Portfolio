@@ -8,10 +8,17 @@ import {
   FiLayout,
 } from 'react-icons/fi';
 
+interface Skill {
+  name: string;
+  proficiency: number;
+  level: 'Expert' | 'Advanced' | 'Intermediate';
+}
+
 interface SkillCategory {
   category: string;
   icon: React.ReactNode;
-  skills: string[];
+  skills: Skill[];
+  description?: string;
 }
 
 const SkillsSection: React.FC = () => {
@@ -21,32 +28,84 @@ const SkillsSection: React.FC = () => {
     {
       category: 'Frontend Development',
       icon: <FiLayout size={24} />,
-      skills: ['React.js', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3', 'TailwindCSS', 'Responsive Design'],
+      description: 'UI/UX & Interactive Experiences',
+      skills: [
+        { name: 'React.js', proficiency: 95, level: 'Expert' },
+        { name: 'JavaScript', proficiency: 98, level: 'Expert' },
+        { name: 'HTML5 & CSS3', proficiency: 96, level: 'Expert' },
+        { name: 'Responsive Design', proficiency: 93, level: 'Advanced' },
+        { name: 'Axios', proficiency: 93, level: 'Advanced' },
+        { name: 'Framer Motion', proficiency: 93, level: 'Advanced' },
+
+      ],
     },
     {
       category: 'Backend Development',
       icon: <FiCode size={24} />,
-      skills: ['Laravel', 'PHP', 'Java', 'Python', 'RESTful APIs', 'Microservices', 'Server Architecture'],
+      description: 'Server-side & API Solutions',
+      skills: [
+        { name: 'Laravel', proficiency: 94, level: 'Expert' },
+        { name: 'PHP', proficiency: 93, level: 'Expert' },
+        { name: 'Java', proficiency: 85, level: 'Advanced' },
+        { name: 'Python', proficiency: 88, level: 'Advanced' },
+        { name: 'APIs', proficiency: 95, level: 'Expert' },
+      ],
     },
     {
       category: 'Databases & Data',
       icon: <FiDatabase size={24} />,
-      skills: ['MySQL', 'MongoDB', 'Database Design', 'SQL Optimization', 'Data Modeling'],
+      description: 'Data Architecture & Optimization',
+      skills: [
+        { name: 'MySQL', proficiency: 93, level: 'Expert' },
+        { name: 'MongoDB', proficiency: 88, level: 'Advanced' },
+        { name: 'SQL', proficiency: 88, level: 'Advanced' },
+        { name: 'PlSQL', proficiency: 88, level: 'Advanced' },
+        { name: 'SQL Optimization', proficiency: 89, level: 'Advanced' },
+      ],
     },
     {
-      category: 'Tools & Version Control',
+      category: 'Tools & DevOps',
       icon: <FiGitBranch size={24} />,
-      skills: ['Git', 'GitHub', 'GitLab', 'CI/CD Pipelines', 'Docker', 'Agile/Scrum', 'Jira'],
+      description: 'Version Control & Deployment',
+      skills: [
+        { name: 'Git & GitHub', proficiency: 96, level: 'Expert' },
+        { name: 'Agile/Scrum', proficiency: 90, level: 'Advanced' },
+        { name: 'Jira', proficiency: 88, level: 'Advanced' },
+      ],
     },
   ];
+
+  const getLevelColor = (level: 'Expert' | 'Advanced' | 'Intermediate') => {
+    switch (level) {
+      case 'Expert':
+        return 'from-neon-blue to-cyan-400';
+      case 'Advanced':
+        return 'from-cyan-400 to-blue-400';
+      case 'Intermediate':
+        return 'from-blue-400 to-cyan-300';
+    }
+  };
+
+  // Proficiency Bar Component
+  const ProficiencyBar: React.FC<{ proficiency: number; level: 'Expert' | 'Advanced' | 'Intermediate' }> = ({ proficiency, level }) => (
+    <div className="w-full h-2 bg-dark-bg/50 rounded-full overflow-hidden border border-neon-blue/10">
+      <motion.div
+        initial={{ width: 0 }}
+        whileInView={{ width: `${proficiency}%` }}
+        transition={{ duration: 1.5, ease: 'easeOut' }}
+        viewport={{ once: true }}
+        className={`h-full bg-gradient-to-r ${getLevelColor(level)} shadow-lg shadow-neon-blue/50 rounded-full`}
+      />
+    </div>
+  );
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
+        staggerChildren: 0.08,
+        delayChildren: 0.15,
       },
     },
   };
@@ -56,7 +115,7 @@ const SkillsSection: React.FC = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: 'easeOut' },
+      transition: { duration: 0.6 },
     },
   };
 
@@ -66,7 +125,7 @@ const SkillsSection: React.FC = () => {
       opacity: 1,
       scale: 1,
       transition: {
-        type: 'spring',
+        type: 'spring' as const,
         stiffness: 100,
         damping: 15,
         delay: i * 0.04,
@@ -121,8 +180,13 @@ const SkillsSection: React.FC = () => {
                       <h3 className="text-2xl font-semibold text-text-light tracking-tight">{category.category}</h3>
                     </div>
 
+                    {/* Category Description */}
+                    {category.description && (
+                      <p className="text-sm text-text-muted/70 mb-8 italic">{category.description}</p>
+                    )}
+
                     {/* Skills List */}
-                    <div className="space-y-4">
+                    <div className="grid grid-cols-2 gap-6">
                       {category.skills.map((skill, skillIdx) => (
                         <motion.div
                           key={skillIdx}
@@ -130,12 +194,12 @@ const SkillsSection: React.FC = () => {
                           variants={skillVariants}
                           initial="hidden"
                           animate={inView ? 'visible' : 'hidden'}
-                          className="flex items-center gap-3 group/skill"
+                          className="group/skill"
                         >
-                          <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-neon-blue to-cyan-400 group-hover/skill:scale-125 transition-transform duration-300"></div>
-                          <span className="text-text-muted group-hover/skill:text-text-light transition-colors duration-300 font-medium text-base">
-                            {skill}
+                          <span className="text-text-light font-semibold group-hover/skill:text-neon-blue transition-colors duration-300 block mb-3">
+                            {skill.name}
                           </span>
+                          <ProficiencyBar proficiency={skill.proficiency} level={skill.level} />
                         </motion.div>
                       ))}
                     </div>
@@ -145,52 +209,7 @@ const SkillsSection: React.FC = () => {
             ))}
           </motion.div>
 
-          {/* Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-neon-blue/20 to-transparent mb-20"></div>
-
-          {/* Additional Competencies */}
-          <motion.div variants={itemVariants}>
-            <div className="mb-10">
-              <h3 className="text-3xl font-bold text-text-light mb-2">Professional Competencies</h3>
-              <p className="text-text-muted text-base">Core competencies and additional expertise</p>
-            </div>
-
-            <motion.div
-              variants={containerVariants}
-              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"
-            >
-              {[
-                'System Design',
-                'Problem Solving',
-                'Code Quality',
-                'Performance Optimization',
-                'Testing & QA',
-                'Clean Code',
-                'Team Leadership',
-                'Agile/Scrum',
-                'API Design',
-                'Security Best Practices',
-                'Scalable Architecture',
-                'Technical Documentation',
-              ].map((skill, idx) => (
-                <motion.div
-                  key={idx}
-                  custom={idx}
-                  variants={skillVariants}
-                  initial="hidden"
-                  animate={inView ? 'visible' : 'hidden'}
-                  whileHover={{ y: -2 }}
-                  className="group/competency"
-                >
-                  <div className="border border-neon-blue/15 rounded-lg p-5 bg-dark-bg/40 backdrop-blur-sm hover:bg-dark-bg/60 hover:border-neon-blue/30 transition-all duration-300 flex items-center justify-center text-center h-full">
-                    <p className="text-text-muted group-hover/competency:text-neon-blue transition-colors duration-300 font-medium text-sm">
-                      {skill}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
+          
         </motion.div>
       </div>
     </section>

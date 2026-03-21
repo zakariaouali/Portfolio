@@ -19,6 +19,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
   const navLinks: NavLink[] = [
     { id: 'about', name: 'About' },
     { id: 'skills', name: 'Skills' },
+    { id: 'certificates', name: 'Certificates' },
     { id: 'projects', name: 'Projects' },
     { id: 'contact', name: 'Contact' },
   ];
@@ -93,7 +94,6 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
               style={{
                 padding: '10px 20px',
                 borderRadius: '30px',
-                border: 'none',
                 background: activeSection === link.id
                   ? 'linear-gradient(135deg, rgba(0, 217, 255, 0.3), rgba(0, 153, 204, 0.2))'
                   : 'transparent',

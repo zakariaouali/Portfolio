@@ -19,8 +19,9 @@ const ExperienceSection: React.FC = () => {
       company: 'Yes to the Net',
       period: 'May 2025 – June 2025',
       description: [
-        'Worked on development of a SaaS platform for document and data management',
-        'Participated in the design, implementation and delivery in an Agile team',
+        'Worked on the development of a SaaS platform for document and data management as a Full Stack Developer',
+        'Contributed to the full-stack development of the project, including backend, frontend, and API integration',
+        'Collaborated with engineers and developers to plan, organize, and structure the project architecture before implementation' ,
         'Collaborated with team members to deliver high-quality code and solutions',
       ],
       highlights: [

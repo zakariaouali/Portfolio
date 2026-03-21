@@ -5,6 +5,7 @@ import TechStackCarousel from './components/TechStackCarousel';
 import HeroSection from './components/sections/HeroSection';
 import AboutSection from './components/sections/AboutSection';
 import SkillsSection from './components/sections/SkillsSection';
+import CertificatesSection from './components/sections/CertificatesSection';
 import ProjectsSection from './components/sections/ProjectsSection';
 import ExperienceSection from './components/sections/ExperienceSection';
 import ContactSection from './components/sections/ContactSection';
@@ -24,7 +25,7 @@ function App() {
   useEffect(() => {
     // Track active section on scroll
     const handleScroll = () => {
-      const sections = ['home', 'about', 'skills', 'projects', 'experience', 'contact'];
+      const sections = ['home', 'about', 'skills', 'certificates', 'projects', 'experience', 'contact'];
       
       for (const sectionId of sections) {
         const element = document.getElementById(sectionId);
@@ -50,6 +51,7 @@ function App() {
       <TechStackCarousel />
       <AboutSection />
       <SkillsSection />
+      <CertificatesSection />
       <ProjectsSection />
       <ExperienceSection />
       <ContactSection />
