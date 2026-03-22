@@ -153,7 +153,7 @@ const ProjectsSection: React.FC = () => {
     {
       title: 'Medical Appointment Platform',
       description:
-        'Full-stack medical platform allowing patients to explore services and book appointments online with appointment management and automatic email notifications.',
+        'Full-stack medical platform to handle appointments that received online with the option of making new appointment directy and handle all of them in one place with automatic email notifications.',
       technologies: ['Laravel', 'MySQL', 'phpMyAdmin',"css", 'Email Service'],
       images: [
         'public/appointments.PNG',
@@ -163,6 +163,21 @@ const ProjectsSection: React.FC = () => {
       featured: true,
       github: 'https://github.com/zakariaouali/Appointments',
       demo: 'https://example.com',
+    },
+    {
+      title: 'Website for a Doctor',
+      description:
+        'Medical platform allowing patients to explore services and book appointments online with appointment management and automatic email notifications.',
+      technologies: ['React','API',"css", 'Email Service'],
+      images: [
+        'public/Dr/home.PNG',
+        'public/Dr/data.PNG',
+        'public/Dr/location.PNG',
+        'public/Dr/app.PNG',
+      ],
+      featured: true,
+      github: 'https://github.com/zakariaouali/DrDaggouj',
+      demo: 'https://zakariaouali.github.io/DrDouggouj/',
     },
   ];
 
@@ -195,14 +210,30 @@ const ProjectsSection: React.FC = () => {
           animate={inView ? 'visible' : 'hidden'}
         >
           {/* Section Title */}
-          <motion.div variants={itemVariants} className="mb-16">
-            <h2 className="text-5xl md:text-6xl font-bold text-text-light mb-2">
+          <motion.div variants={itemVariants} className="mb-20">
+            <div className="inline-block mb-4">
+              <span style={{
+                display: 'inline-block',
+                padding: '8px 16px',
+                borderRadius: '50px',
+                background: 'linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(0, 150, 200, 0.05))',
+                border: '1px solid rgba(0, 217, 255, 0.3)',
+                color: '#00d9ff',
+                fontSize: '12px',
+                fontWeight: '600',
+                letterSpacing: '0.5px',
+                textTransform: 'uppercase'
+              }}>
+                ✨ Portfolio Highlights
+              </span>
+            </div>
+            <h2 className="text-5xl md:text-7xl font-bold text-text-light mb-4">
               Featured <span className="gradient-text">Projects</span>
             </h2>
-            <p className="text-text-muted text-lg">
-              A selection of my best work showcasing modern development practices
+            <p className="text-text-muted text-lg max-w-2xl">
+              Transforming ideas into scalable, production-ready solutions. Each project showcases modern development practices and architectural excellence.
             </p>
-            <div className="h-1 w-20 bg-gradient-to-r from-neon-blue to-neon-blue-dark mt-6 rounded-full"></div>
+            <div className="h-1 w-20 bg-gradient-to-r from-neon-blue to-neon-blue-dark mt-8 rounded-full"></div>
           </motion.div>
 
           {/* Projects Grid */}
@@ -214,238 +245,279 @@ const ProjectsSection: React.FC = () => {
               <motion.div
                 key={idx}
                 variants={itemVariants}
-                whileHover={{ y: -10 }}
-                className="group h-full"
+                whileHover={{ y: -8 }}
+                className="group"
               >
-                <div className="card h-full flex flex-col overflow-hidden">
-                  {/* Image Container with Carousel */}
+                <div className="overflow-hidden rounded-2xl h-full backdrop-blur-xl border border-neon-blue/20 hover:border-neon-blue/50 bg-gradient-to-br from-slate-900/40 to-slate-800/20 shadow-md hover:shadow-xl transition-all duration-500 flex flex-col">
+                  {/* Image Container */}
                   <div style={{
                     position: 'relative',
                     backgroundColor: '#111232',
-                    height: '288px',
+                    height: '256px',
                     flexShrink: 0,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    overflow: 'hidden',
                   }}>
-                    {/* Images Wrapper */}
+                    {/* Background Gradient */}
                     <div style={{
-                      position: 'relative',
-                      width: '100%',
-                      height: '100%',
-                      overflow: 'hidden',
-                    }}>
-                    <motion.div
-                      key={getImageIndex(idx)}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <motion.img
-                        whileHover={{ scale: 1.1 }}
-                        transition={{ duration: 0.4 }}
-                        src={project.images[getImageIndex(idx)]}
-                        alt={`${project.title} - Screenshot ${getImageIndex(idx) + 1}`}
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover',
-                        }}
-                      />
-                    </motion.div>
+                      position: 'absolute',
+                      inset: 0,
+                      background: 'linear-gradient(135deg, rgba(0, 217, 255, 0.1) 0%, rgba(0, 150, 200, 0.05) 100%)',
+                      zIndex: 1,
+                      pointerEvents: 'none',
+                    }} />
 
-                    {/* Navigation Buttons - Show only if multiple images */}
+                    {/* Image */}
+                    <motion.img
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.3, type: 'tween' }}
+                      src={project.images[getImageIndex(idx)]}
+                      alt={`${project.title} screenshot`}
+                      style={{
+                        position: 'relative',
+                        zIndex: 2,
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                      }}
+                    />
+
+                    {/* Vignette */}
+                    <div style={{
+                      position: 'absolute',
+                      inset: 0,
+                      background: 'radial-gradient(ellipse at center, transparent 0%, rgba(10, 14, 39, 0.3) 100%)',
+                      pointerEvents: 'none',
+                      zIndex: 3,
+                    }} />
+
+                    {/* Controls */}
                     {project.images.length > 1 && (
                       <>
-                        {/* Previous Button */}
                         <motion.button
-                          whileHover={{ scale: 1.15 }}
+                          whileHover={{ scale: 1.2, x: -4 }}
                           whileTap={{ scale: 0.9 }}
                           onClick={() => prevImage(idx, project.images.length)}
                           style={{
                             position: 'absolute',
-                            left: '16px',
+                            left: '12px',
                             top: '50%',
                             transform: 'translateY(-50%)',
                             zIndex: 20,
-                            padding: '10px',
-                            borderRadius: '50%',
-                            background: 'linear-gradient(135deg, rgba(0, 217, 255, 0.2), rgba(0, 150, 200, 0.15))',
-                            border: '2px solid rgba(0, 217, 255, 0.4)',
+                            width: '40px',
+                            height: '40px',
+                            borderRadius: '10px',
+                            background: 'linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(0, 150, 200, 0.1))',
+                            border: '1.5px solid rgba(0, 217, 255, 0.4)',
                             color: '#00d9ff',
                             cursor: 'pointer',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            boxShadow: '0 0 20px rgba(0, 217, 255, 0.2)',
-                            backdropFilter: 'blur(10px)',
-                            transition: 'all 0.3s ease',
+                            boxShadow: '0 4px 16px rgba(0, 217, 255, 0.2)',
+                            backdropFilter: 'blur(8px)',
+                            transition: 'all 0.2s ease',
                           }}
                           onMouseEnter={(e) => {
-                            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(0, 217, 255, 0.4), rgba(0, 150, 200, 0.3))';
-                            e.currentTarget.style.borderColor = 'rgba(0, 217, 255, 0.8)';
-                            e.currentTarget.style.boxShadow = '0 0 30px rgba(0, 217, 255, 0.6), inset 0 0 20px rgba(0, 217, 255, 0.1)';
+                            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(0, 217, 255, 0.25), rgba(0, 150, 200, 0.15))';
+                            e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 217, 255, 0.3)';
                           }}
                           onMouseLeave={(e) => {
-                            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(0, 217, 255, 0.2), rgba(0, 150, 200, 0.15))';
-                            e.currentTarget.style.borderColor = 'rgba(0, 217, 255, 0.4)';
-                            e.currentTarget.style.boxShadow = '0 0 20px rgba(0, 217, 255, 0.2)';
+                            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(0, 150, 200, 0.1))';
+                            e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 217, 255, 0.2)';
                           }}
-                          aria-label="Previous image"
+                          aria-label="Previous"
                         >
-                          <FiChevronLeft size={24} />
+                          <FiChevronLeft size={18} />
                         </motion.button>
 
-                        {/* Next Button */}
                         <motion.button
-                          whileHover={{ scale: 1.15 }}
+                          whileHover={{ scale: 1.2, x: 4 }}
                           whileTap={{ scale: 0.9 }}
                           onClick={() => nextImage(idx, project.images.length)}
                           style={{
                             position: 'absolute',
-                            right: '16px',
+                            right: '12px',
                             top: '50%',
                             transform: 'translateY(-50%)',
                             zIndex: 20,
-                            padding: '10px',
-                            borderRadius: '50%',
-                            background: 'linear-gradient(135deg, rgba(0, 217, 255, 0.2), rgba(0, 150, 200, 0.15))',
-                            border: '2px solid rgba(0, 217, 255, 0.4)',
+                            width: '40px',
+                            height: '40px',
+                            borderRadius: '10px',
+                            background: 'linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(0, 150, 200, 0.1))',
+                            border: '1.5px solid rgba(0, 217, 255, 0.4)',
                             color: '#00d9ff',
                             cursor: 'pointer',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            boxShadow: '0 0 20px rgba(0, 217, 255, 0.2)',
-                            backdropFilter: 'blur(10px)',
-                            transition: 'all 0.3s ease',
+                            boxShadow: '0 4px 16px rgba(0, 217, 255, 0.2)',
+                            backdropFilter: 'blur(8px)',
+                            transition: 'all 0.2s ease',
                           }}
                           onMouseEnter={(e) => {
-                            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(0, 217, 255, 0.4), rgba(0, 150, 200, 0.3))';
-                            e.currentTarget.style.borderColor = 'rgba(0, 217, 255, 0.8)';
-                            e.currentTarget.style.boxShadow = '0 0 30px rgba(0, 217, 255, 0.6), inset 0 0 20px rgba(0, 217, 255, 0.1)';
+                            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(0, 217, 255, 0.25), rgba(0, 150, 200, 0.15))';
+                            e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 217, 255, 0.3)';
                           }}
                           onMouseLeave={(e) => {
-                            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(0, 217, 255, 0.2), rgba(0, 150, 200, 0.15))';
-                            e.currentTarget.style.borderColor = 'rgba(0, 217, 255, 0.4)';
-                            e.currentTarget.style.boxShadow = '0 0 20px rgba(0, 217, 255, 0.2)';
+                            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(0, 150, 200, 0.1))';
+                            e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 217, 255, 0.2)';
                           }}
-                          aria-label="Next image"
+                          aria-label="Next"
                         >
-                          <FiChevronRight size={24} />
+                          <FiChevronRight size={18} />
                         </motion.button>
 
-                        {/* Image Indicators */}
-                        <div
-                          style={{
-                            position: 'absolute',
-                            bottom: '20px',
-                            left: '50%',
-                            transform: 'translateX(-50%)',
-                            zIndex: 20,
-                            display: 'flex',
-                            gap: '10px',
-                            padding: '8px 12px',
-                            background: 'rgba(10, 14, 39, 0.5)',
-                            backdropFilter: 'blur(10px)',
-                            borderRadius: '20px',
-                            border: '1px solid rgba(0, 217, 255, 0.2)',
-                          }}
-                        >
+                        {/* Indicators */}
+                        <div style={{
+                          position: 'absolute',
+                          bottom: '12px',
+                          left: '50%',
+                          transform: 'translateX(-50%)',
+                          zIndex: 20,
+                          display: 'flex',
+                          gap: '6px',
+                          padding: '6px 10px',
+                          background: 'rgba(10, 14, 39, 0.6)',
+                          backdropFilter: 'blur(8px)',
+                          borderRadius: '20px',
+                          border: '1px solid rgba(0, 217, 255, 0.2)',
+                        }}>
                           {project.images.map((_, imgIdx) => (
                             <motion.button
                               key={imgIdx}
                               onClick={() => goToImage(idx, imgIdx)}
-                              whileHover={{ scale: 1.4 }}
-                              whileTap={{ scale: 0.8 }}
                               style={{
-                                width: getImageIndex(idx) === imgIdx ? '28px' : '10px',
-                                height: '10px',
+                                width: getImageIndex(idx) === imgIdx ? '24px' : '6px',
+                                height: '6px',
                                 borderRadius: '50%',
                                 background: getImageIndex(idx) === imgIdx 
                                   ? 'linear-gradient(135deg, #00d9ff, #00a8cc)' 
                                   : 'rgba(0, 217, 255, 0.3)',
-                                border: getImageIndex(idx) === imgIdx ? '2px solid #00d9ff' : '1px solid rgba(0, 217, 255, 0.5)',
+                                border: 'none',
                                 cursor: 'pointer',
                                 transition: 'all 0.3s ease',
-                                boxShadow: getImageIndex(idx) === imgIdx ? '0 0 15px rgba(0, 217, 255, 0.5)' : 'none',
+                                boxShadow: getImageIndex(idx) === imgIdx ? '0 0 12px rgba(0, 217, 255, 0.5)' : 'none',
                               }}
-                              onMouseEnter={(e) => {
-                                if (getImageIndex(idx) !== imgIdx) {
-                                  e.currentTarget.style.background = 'rgba(0, 217, 255, 0.6)';
-                                  e.currentTarget.style.boxShadow = '0 0 10px rgba(0, 217, 255, 0.3)';
-                                }
-                              }}
-                              onMouseLeave={(e) => {
-                                if (getImageIndex(idx) !== imgIdx) {
-                                  e.currentTarget.style.background = 'rgba(0, 217, 255, 0.3)';
-                                  e.currentTarget.style.boxShadow = 'none';
-                                }
-                              }}
-                              aria-label={`Go to image ${imgIdx + 1}`}
                             />
                           ))}
                         </div>
 
-                        {/* Image Counter */}
-                        <div
-                          style={{
-                            position: 'absolute',
-                            top: '16px',
-                            right: '16px',
-                            zIndex: 20,
-                            padding: '6px 14px',
-                            borderRadius: '25px',
-                            background: 'linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(10, 14, 39, 0.7))',
-                            border: '1.5px solid rgba(0, 217, 255, 0.3)',
-                            backdropFilter: 'blur(10px)',
-                            color: '#00d9ff',
-                            fontSize: '12px',
-                            fontWeight: '600',
-                            letterSpacing: '0.5px',
-                            boxShadow: '0 4px 15px rgba(0, 217, 255, 0.1)',
-                          }}
-                        >
+                        {/* Counter */}
+                        <div style={{
+                          position: 'absolute',
+                          top: '12px',
+                          right: '12px',
+                          zIndex: 20,
+                          padding: '4px 10px',
+                          borderRadius: '16px',
+                          background: 'linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(10, 14, 39, 0.7))',
+                          border: '1px solid rgba(0, 217, 255, 0.3)',
+                          backdropFilter: 'blur(8px)',
+                          color: '#00d9ff',
+                          fontSize: '11px',
+                          fontWeight: '600',
+                        }}>
                           {getImageIndex(idx) + 1} / {project.images.length}
                         </div>
                       </>
                     )}
-                    </div>
                   </div>
 
                   {/* Content */}
-                  <div className="p-6 flex-1 flex flex-col">
-                    {/* Title */}
-                    <h3 className="text-2xl font-bold text-text-light mb-3 group-hover:text-neon-blue transition-colors">
-                      {project.title}
-                    </h3>
+                  <div className="p-6 flex flex-col justify-between flex-1">
+                    <div>
+                      <h3 style={{
+                        fontSize: '16px',
+                        fontWeight: '700',
+                        color: '#e0e7ff',
+                        marginBottom: '8px',
+                        transition: 'color 0.3s ease',
+                      }}
+                      className="group-hover:text-neon-blue">
+                        {project.title}
+                      </h3>
 
-                    {/* Description */}
-                    <p className="text-text-muted text-sm leading-relaxed mb-4 flex-1">
-                      {project.description}
-                    </p>
+                      <p style={{
+                        color: '#a0aec0',
+                        fontSize: '13px',
+                        lineHeight: '1.5',
+                        marginBottom: '12px',
+                      }}>
+                        {project.description}
+                      </p>
+                    </div>
 
-                    {/* Technologies - Icons */}
-                    <div className="mb-6 pb-6 border-b border-neon-blue/10">
-                      <div className="flex flex-wrap gap-3">
+                    <div style={{
+                      height: '1px',
+                      background: 'linear-gradient(90deg, rgba(0, 217, 255, 0.2), transparent)',
+                      margin: '12px 0',
+                    }} />
+
+                    <div style={{
+                      marginBottom: '14px',
+                    }}>
+                      <p style={{
+                        fontSize: '11px',
+                        fontWeight: '700',
+                        color: '#7a86c4',
+                        letterSpacing: '0.4px',
+                        textTransform: 'uppercase',
+                        marginBottom: '10px'
+                      }}>
+                        Tech Stack
+                      </p>
+                      <div style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        gap: '10px'
+                      }}>
                         {project.technologies.map((tech, i) => (
-                          <motion.div
+                          <div
                             key={i}
-                            whileHover={{ scale: 1.2, y: -5 }}
-                            className="p-2 rounded-lg bg-neon-blue/10 border border-neon-blue/30 hover:border-neon-blue/60 hover:bg-neon-blue/20 transition-all text-neon-blue cursor-default"
+                            style={{
+                              padding: '8px 12px',
+                              borderRadius: '10px',
+                              background: 'linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(0, 150, 200, 0.08))',
+                              border: '1.5px solid rgba(0, 217, 255, 0.35)',
+                              color: '#00d9ff',
+                              fontSize: '18px',
+                              fontWeight: '600',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              cursor: 'default',
+                              transition: 'all 0.2s ease',
+                              minWidth: '48px',
+                              height: '48px',
+                            }}
                             title={tech}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.background = 'linear-gradient(135deg, rgba(0, 217, 255, 0.25), rgba(0, 150, 200, 0.15))';
+                              e.currentTarget.style.borderColor = 'rgba(0, 217, 255, 0.6)';
+                              e.currentTarget.style.transform = 'scale(1.1)';
+                              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 217, 255, 0.2)';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.background = 'linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(0, 150, 200, 0.08))';
+                              e.currentTarget.style.borderColor = 'rgba(0, 217, 255, 0.35)';
+                              e.currentTarget.style.transform = 'scale(1)';
+                              e.currentTarget.style.boxShadow = 'none';
+                            }}
                           >
-                            <div className="w-6 h-6 flex items-center justify-center text-lg">
-                              {getTechIcon(tech)}
-                            </div>
-                          </motion.div>
+                            {getTechIcon(tech)}
+                          </div>
                         ))}
                       </div>
                     </div>
 
-                    {/* Links */}
-                    <div className="flex gap-3 pt-4">
+                    <div style={{
+                      display: 'flex',
+                      gap: '10px',
+                      marginTop: 'auto',
+                    }}>
                       {project.github && (
                         <motion.a
                           whileHover={{ scale: 1.05 }}
@@ -453,9 +525,35 @@ const ProjectsSection: React.FC = () => {
                           href={project.github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-neon-blue/10 text-neon-blue rounded-lg hover:bg-neon-blue/20 border border-neon-blue/30 hover:border-neon-blue/60 transition-all font-semibold"
+                          style={{
+                            flex: 1,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '6px',
+                            padding: '8px 12px',
+                            background: 'linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(0, 150, 200, 0.08))',
+                            border: '1.5px solid rgba(0, 217, 255, 0.4)',
+                            color: '#00d9ff',
+                            borderRadius: '8px',
+                            cursor: 'pointer',
+                            textDecoration: 'none',
+                            fontWeight: '600',
+                            fontSize: '12px',
+                            transition: 'all 0.2s ease',
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(0, 217, 255, 0.25), rgba(0, 150, 200, 0.15))';
+                            e.currentTarget.style.borderColor = 'rgba(0, 217, 255, 0.7)';
+                            e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 217, 255, 0.25)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(0, 150, 200, 0.08))';
+                            e.currentTarget.style.borderColor = 'rgba(0, 217, 255, 0.4)';
+                            e.currentTarget.style.boxShadow = 'none';
+                          }}
                         >
-                          <FiGithub size={18} /> Code
+                          <FiGithub size={14} /> Code
                         </motion.a>
                       )}
                       {project.demo && (
@@ -465,9 +563,34 @@ const ProjectsSection: React.FC = () => {
                           href={project.demo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-neon-blue-dark to-neon-blue text-white rounded-lg hover:shadow-lg transition-all font-semibold"
+                          style={{
+                            flex: 1,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '6px',
+                            padding: '8px 12px',
+                            background: 'linear-gradient(135deg, #00d9ff, #00a8cc)',
+                            border: '1.5px solid rgba(0, 217, 255, 0.8)',
+                            color: '#0a0e27',
+                            borderRadius: '8px',
+                            cursor: 'pointer',
+                            textDecoration: 'none',
+                            fontWeight: '700',
+                            fontSize: '12px',
+                            transition: 'all 0.2s ease',
+                            boxShadow: '0 2px 8px rgba(0, 217, 255, 0.2)',
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 217, 255, 0.4)';
+                            e.currentTarget.style.background = 'linear-gradient(135deg, #00e8ff, #00b8d4)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 217, 255, 0.2)';
+                            e.currentTarget.style.background = 'linear-gradient(135deg, #00d9ff, #00a8cc)';
+                          }}
                         >
-                          <FiExternalLink size={18} /> Demo
+                          <FiExternalLink size={14} /> Live
                         </motion.a>
                       )}
                     </div>
